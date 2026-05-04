@@ -1,0 +1,1 @@
+void para_range(int start, int end, int nproc, int rank, int &ista, int &iend);

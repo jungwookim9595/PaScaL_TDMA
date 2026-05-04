@@ -1,21 +1,22 @@
-# Compiler and complilation flag are included in Makefile.inc
-include Makefile.inc
+# Usage:
+#   make LANG=C [target]       - build C version
+#   make LANG=Fortran [target] - build Fortran version (default)
+#
+# Targets: all, lib, example, clean
 
-lib:
-	mkdir -p include;mkdir -p lib
-	cd timer; mkdir -p obj; make all
-	cd src; mkdir -p obj; make all
+LANG ?= Fortran
 
-example:
-	cd examples; make all
+ifeq ($(LANG),C)
+    SUBDIR = 00_C
+else ifeq ($(LANG),Fortran)
+    SUBDIR = 01_Fortran
+else
+    $(error Unsupported LANG=$(LANG). Use LANG=C or LANG=Fortran)
+endif
 
-all:
-	mkdir -p include; mkdir -p lib
-	cd timer; mkdir -p obj; make all
-	cd src; mkdir -p obj; make all
-	cd examples; make all
+TARGETS = all lib example clean
 
-clean:
-	cd timer; make clean
-	cd src; make clean
-	cd examples; make clean
+.PHONY: $(TARGETS)
+
+$(TARGETS):
+	$(MAKE) -C $(SUBDIR) $@
