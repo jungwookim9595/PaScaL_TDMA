@@ -22,9 +22,9 @@
 # FC = $(MPI)/bin/mpifort 
 FC = mpifort 
 
-FLAG  = -fcheck=all -O2 -g -cpp -Wall -fbacktrace -pedantic -fopenmp
+# FLAG  = -fcheck=all -O2 -g -cpp -Wall -fbacktrace -pedantic -fopenmp
 # FLAG  = -fcheck=all -Og -g -cpp -Wall -fbacktrace -pedantic -fopenmp ## Intel
-# FLAG  = -O3 -fPIC -cpp ## nvidia
+FLAG  = -O3 -fPIC -cpp ## nvidia
 # FLAG += -tp=skylake 
 
 ###############################################################################
@@ -32,8 +32,8 @@ FLAG  = -fcheck=all -O2 -g -cpp -Wall -fbacktrace -pedantic -fopenmp
 # PaScaL_TDMA is compiled for CUDA also.
 ###############################################################################
 
-# USE_CUDA = yes
-# FLAG += -mp:multicore -Mcuda -Minfo=accel 
-# FLAG += -DUSE_NVTX
+USE_CUDA = yes
+FLAG += -mp:multicore -Mcuda -Minfo=accel 
+FLAG += -DUSE_NVTX
 
 
